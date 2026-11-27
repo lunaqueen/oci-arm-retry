@@ -166,6 +166,8 @@ You need **6 secrets** in total:
 | `OCI_PRIVATE_KEY` | Full contents of `.pem` file | Open the `.pem` from **Get an OCI API Key** above, copy everything (including `-----BEGIN/END PRIVATE KEY-----`) |
 | `OCI_SSH_PUBLIC_KEY` | Full contents of your `.pub` file | See **Get SSH Public Key** above (starts with `ssh-`) |
 
+> If an Actions run reports `Failed to verify the HTTP(S) Signature`, confirm `OCI_PRIVATE_KEY` and `OCI_FINGERPRINT` come from the same OCI API key, and that the key is registered for the `OCI_USER` in OCI. The ARM workflow checks that the key and fingerprint match before making API calls.
+
 > No GitHub token is needed: relaying to the next Job and auto-disabling use the workflow's built-in `GITHUB_TOKEN`, which GitHub creates for each Job automatically.
 
 #### Step 3: Adjust Script Settings (Optional)

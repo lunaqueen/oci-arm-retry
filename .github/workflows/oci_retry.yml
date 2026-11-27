@@ -46,6 +46,13 @@ jobs:
           printf '%s' "$OCI_PRIVATE_KEY" > ~/.oci/oci_api_key.pem
           chmod 600 ~/.oci/oci_api_key.pem
 
+          # Ensure the configured fingerprint belongs to this private key.
+          actual_fingerprint=$(openssl pkey -in ~/.oci/oci_api_key.pem -pubout -outform DER | openssl dgst -md5 -c | awk '{print $2}')
+          if [[ "${actual_fingerprint,,}" != "${OCI_FINGERPRINT,,}" ]]; then
+            echo "::error title=OCI API key fingerprint mismatch::OCI_FINGERPRINT does not match OCI_PRIVATE_KEY. Set both secrets from the same OCI API key configuration."
+            exit 1
+          fi
+
           # Write SSH public key (installed on the new instance)
           printf '%s\n' "$OCI_SSH_PUBLIC_KEY" > ~/.oci/ssh_public_key.pub
 
