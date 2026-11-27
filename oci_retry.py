@@ -12,7 +12,7 @@ import datetime
 # ╚══════════════════════════════════════════════════════╝
 
 # ─── Configuration ───────────────────────────────────────
-INSTANCE_NAME = "arm-server"
+INSTANCE_NAME = "arm-server-sg"
 UBUNTU_VERSION = "24.04"  # OS for the new instance: "24.04" (default), "26.04" or "22.04"
 ARM_OCPUS = 2
 ARM_MEMORY_IN_GBS = 12
